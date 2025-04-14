@@ -437,18 +437,18 @@
                 <h2>Kontakta mig</h2>
             </div>
             <div class="contact-form">
-                <form>
+                <form action="https://formspree.io/f/https://formspree.io/f/xgvaqvrg" method="POST">
                     <div class="form-group">
                         <label for="name">Namn</label>
-                        <input type="text" id="name" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">E-post</label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="service">Vad gäller det?</label>
-                        <select id="service">
+                        <select id="service" name="service">
                             <option value="analysis">Rörelseanalys</option>
                             <option value="training">Skräddarsydd träning</option>
                             <option value="follow-up">Uppföljning</option>
@@ -457,7 +457,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Beskriv dina besvär/önskemål</label>
-                        <textarea id="message" required></textarea>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
                     <button type="submit" class="form-btn">Skicka</button>
                 </form>
