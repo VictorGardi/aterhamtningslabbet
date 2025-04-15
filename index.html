@@ -25,6 +25,24 @@
                 background-color: var(--light);
                 color: var(--text);
                 line-height: 1.6;
+                overflow-x: hidden;
+            }
+
+            /* Fix text overflow */
+            p,
+            h1,
+            h2,
+            h3,
+            div {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            /* Make all images responsive */
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
             }
 
             header {
@@ -78,6 +96,16 @@
 
             .menu a:hover {
                 color: var(--secondary);
+            }
+
+            /* Mobile menu toggle button */
+            .menu-toggle {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
             }
 
             .hero {
@@ -168,7 +196,7 @@
 
             .services-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 2rem;
             }
 
@@ -186,7 +214,7 @@
             }
 
             .service-img {
-                height: 250px;
+                height: auto;
                 background-color: #ddd;
                 display: flex;
                 align-items: center;
@@ -208,7 +236,7 @@
 
             .testimonial-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 2rem;
             }
 
@@ -324,12 +352,76 @@
 
             /* Responsiv anpassning */
             @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                    padding: 0 10px;
+                }
+
+                section {
+                    padding: 3rem 0;
+                }
+
+                .hero h1 {
+                    font-size: 2rem;
+                }
+
+                .hero p {
+                    font-size: 1rem;
+                }
+
                 .about-content {
                     grid-template-columns: 1fr;
                 }
 
+                .menu-toggle {
+                    display: block;
+                }
+
                 .menu {
                     display: none;
+                    position: fixed;
+                    top: 60px;
+                    left: 0;
+                    width: 100%;
+                    background: var(--primary);
+                    flex-direction: column;
+                    padding: 1rem 0;
+                    text-align: center;
+                    z-index: 99;
+                }
+
+                .menu.active {
+                    display: flex;
+                }
+
+                .menu li {
+                    margin: 0.5rem 0;
+                }
+
+                input,
+                textarea,
+                select,
+                .form-btn {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .service-img {
+                    height: auto;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero {
+                    padding: 4rem 0;
+                }
+
+                .section-header h2 {
+                    font-size: 1.75rem;
+                }
+
+                .contact-form {
+                    padding: 1.5rem;
                 }
             }
         </style>
@@ -339,7 +431,8 @@
             <div class="container">
                 <nav>
                     <div class="logo">Återhämtnings<span>Labbet</span></div>
-                    <ul class="menu">
+                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <ul class="menu" id="mobileMenu">
                         <li><a href="#om-mig">Om mig</a></li>
                         <li><a href="#tjanster">Tjänster</a></li>
                         <li><a href="#testimonials">Resultat</a></li>
@@ -367,12 +460,7 @@
                 </div>
                 <div class="about-content">
                     <div class="about-image">
-                        <img
-                            src="./images/me.jpg"
-                            alt="Rörelsespecialist"
-                            width="400px"
-                            height="533px"
-                        />
+                        <img src="./images/me.jpg" alt="Rörelsespecialist" />
                     </div>
                     <div class="about-text">
                         <h3>En annorlunda approach till smärta och skador</h3>
@@ -417,8 +505,6 @@
                             <img
                                 src="./images/movement-analysis.jpg"
                                 alt="Rörelseanalys"
-                                width="400px"
-                                height="250px"
                             />
                         </div>
                         <div class="service-content">
@@ -435,8 +521,6 @@
                             <img
                                 src="./images/workout-plan.jpg"
                                 alt="Personlig träningsplan"
-                                width="400px"
-                                height="250px"
                             />
                         </div>
                         <div class="service-content">
@@ -450,12 +534,7 @@
                     </div>
                     <div class="service-card">
                         <div class="service-img">
-                            <img
-                                src="./images/meetup.jpg"
-                                alt="Uppföljning"
-                                width="400px"
-                                height="250px"
-                            />
+                            <img src="./images/meetup.jpg" alt="Uppföljning" />
                         </div>
                         <div class="service-content">
                             <h3>Löpande uppföljning</h3>
@@ -589,5 +668,25 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            // Simple mobile menu toggle
+            document
+                .getElementById("menuToggle")
+                .addEventListener("click", function () {
+                    document
+                        .getElementById("mobileMenu")
+                        .classList.toggle("active");
+                });
+
+            // Close menu when link is clicked
+            document.querySelectorAll(".menu a").forEach((item) => {
+                item.addEventListener("click", function () {
+                    document
+                        .getElementById("mobileMenu")
+                        .classList.remove("active");
+                });
+            });
+        </script>
     </body>
 </html>
