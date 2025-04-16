@@ -33,19 +33,26 @@
         <title>Återhämtningslabbet | Rörelsespecialist</title>
         <style>
             :root {
-                --primary: #2c3e50;
-                --secondary: #1abc9c;
-                --light: #ecf0f1;
-                --dark: #4c647d;
-                --accent: #e74c3c;
-                --text: #333333;
+                --primary: #1e1e1e;
+                --secondary: #00b3e3;
+                --light: #ffffff;
+                --gray: #f5f5f7;
+                --dark-gray: #333333;
+                --text: #111111;
+                --text-light: #555555;
+                --accent: #ff4d4d;
+                --border-radius: 12px;
+                --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                --transition: all 0.3s ease;
             }
 
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             }
 
             body {
@@ -53,6 +60,7 @@
                 color: var(--text);
                 line-height: 1.6;
                 overflow-x: hidden;
+                font-size: 16px;
             }
 
             /* Fix text overflow */
@@ -70,22 +78,28 @@
                 max-width: 100%;
                 height: auto;
                 display: block;
+                border-radius: var(--border-radius);
             }
 
             header {
-                background-color: var(--primary);
-                color: white;
-                padding: 1rem 0;
-                position: sticky;
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                color: var(--text);
+                padding: 1.2rem 0;
+                position: fixed;
+                width: 100%;
                 top: 0;
                 z-index: 100;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+                transition: var(--transition);
             }
 
             .container {
                 width: 90%;
                 max-width: 1200px;
                 margin: 0 auto;
+                padding: 0 20px;
             }
 
             nav {
@@ -96,9 +110,10 @@
 
             .logo {
                 font-size: 1.5rem;
-                font-weight: bold;
+                font-weight: 700;
                 display: flex;
                 align-items: center;
+                color: var(--text);
             }
 
             .logo span {
@@ -108,21 +123,39 @@
             .menu {
                 display: flex;
                 list-style: none;
+                gap: 2rem;
             }
 
             .menu li {
-                margin-left: 2rem;
+                position: relative;
             }
 
             .menu a {
-                color: white;
+                color: var(--text);
                 text-decoration: none;
                 font-weight: 500;
-                transition: color 0.3s;
+                font-size: 1rem;
+                transition: var(--transition);
+                padding: 0.5rem 0;
             }
 
             .menu a:hover {
                 color: var(--secondary);
+            }
+
+            .menu a::after {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--secondary);
+                transition: var(--transition);
+            }
+
+            .menu a:hover::after {
+                width: 100%;
             }
 
             /* Mobile menu toggle button */
@@ -130,122 +163,194 @@
                 display: none;
                 background: none;
                 border: none;
-                color: white;
+                color: var(--text);
                 font-size: 1.5rem;
                 cursor: pointer;
+                transition: var(--transition);
+            }
+
+            .menu-toggle:hover {
+                color: var(--secondary);
             }
 
             .hero {
-                background:
-                    linear-gradient(
-                        rgba(76, 100, 125, 0.9),
-                        rgba(76, 100, 125, 0.9)
-                    ),
-                    url("/api/placeholder/1200/600") center/cover;
+                background: linear-gradient(
+                    160deg,
+                    var(--primary) 0%,
+                    #2a2a2a 100%
+                );
                 color: white;
-                padding: 6rem 0;
+                padding: 12rem 0 8rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0, 179, 227, 0.2) 0%,
+                    transparent 70%
+                );
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
                 text-align: center;
+                max-width: 900px;
+                margin: 0 auto;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
+                font-size: 3.5rem;
+                font-weight: 800;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+                background: linear-gradient(90deg, white, #a0e9ff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
                 max-width: 700px;
-                margin: 0 auto 2rem;
+                margin: 0 auto 3rem;
+                color: rgba(255, 255, 255, 0.9);
             }
 
             .btn {
                 display: inline-block;
                 background-color: var(--secondary);
                 color: white;
-                padding: 0.8rem 2rem;
-                border-radius: 5px;
+                padding: 1rem 2.5rem;
+                border-radius: 50px;
                 text-decoration: none;
-                font-weight: bold;
-                transition: background-color 0.3s;
+                font-weight: 600;
+                transition: var(--transition);
+                border: none;
+                font-size: 1rem;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(0, 179, 227, 0.3);
             }
 
             .btn:hover {
-                background-color: #16a085;
+                background-color: #00a0cc;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 179, 227, 0.4);
+            }
+
+            .btn-secondary {
+                background-color: transparent;
+                border: 2px solid var(--secondary);
+                color: var(--secondary);
+                box-shadow: none;
+            }
+
+            .btn-secondary:hover {
+                background-color: var(--secondary);
+                color: white;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 179, 227, 0.4);
             }
 
             section {
-                padding: 5rem 0;
+                padding: 6rem 0;
+                position: relative;
+            }
+
+            section.light {
+                background-color: var(--light);
+            }
+
+            section.gray {
+                background-color: var(--gray);
             }
 
             .section-header {
                 text-align: center;
-                margin-bottom: 3rem;
+                margin-bottom: 4rem;
             }
 
             .section-header h2 {
-                font-size: 2rem;
-                color: var(--primary);
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--text);
+                margin-bottom: 1rem;
                 position: relative;
                 display: inline-block;
-                padding-bottom: 10px;
             }
 
-            .section-header h2::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                left: 25%;
-                width: 50%;
-                height: 3px;
-                background-color: var(--secondary);
+            .section-header p {
+                font-size: 1.2rem;
+                color: var(--text-light);
+                max-width: 700px;
+                margin: 0 auto;
             }
 
             .about-content {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 3rem;
+                gap: 5rem;
                 align-items: center;
             }
 
+            .about-image img {
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+            }
+
             .about-text h3 {
-                margin-bottom: 1rem;
-                color: var(--primary);
+                margin-bottom: 1.5rem;
+                color: var(--text);
+                font-size: 1.8rem;
+                font-weight: 600;
             }
 
-            .services {
-                background-color: var(--dark);
-                color: white;
-            }
-
-            .services .section-header h2 {
-                color: white;
+            .about-text p {
+                margin-bottom: 1.5rem;
+                color: var(--text-light);
             }
 
             .services-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 2rem;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 3rem;
             }
 
             .service-card {
-                background-color: white;
-                color: var(--text);
-                border-radius: 8px;
+                background-color: var(--light);
+                border-radius: var(--border-radius);
                 overflow: hidden;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s;
+                box-shadow: var(--box-shadow);
+                transition: var(--transition);
+                height: 100%;
             }
 
             .service-card:hover {
                 transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
             }
 
             .service-img {
-                height: auto;
-                background-color: #ddd;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                height: 220px;
+                overflow: hidden;
+            }
+
+            .service-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: var(--transition);
+            }
+
+            .service-card:hover .service-img img {
+                transform: scale(1.05);
             }
 
             .service-content {
@@ -254,63 +359,145 @@
 
             .service-content h3 {
                 margin-bottom: 1rem;
-                color: var(--primary);
+                color: var(--text);
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+
+            .service-content p {
+                color: var(--text-light);
             }
 
             .testimonials {
-                background-color: #f9f9f9;
+                position: relative;
+            }
+
+            .testimonials::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    circle at 10% 90%,
+                    rgba(0, 179, 227, 0.05) 0%,
+                    transparent 60%
+                );
+                z-index: 0;
             }
 
             .testimonial-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 2rem;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 3rem;
+                position: relative;
+                z-index: 1;
             }
 
             .testimonial-card {
                 background-color: white;
-                padding: 2rem;
-                border-radius: 8px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                padding: 2.5rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                transition: var(--transition);
+                height: 100%;
+                position: relative;
+            }
+
+            .testimonial-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            }
+
+            .testimonial-card::before {
+                content: '"';
+                position: absolute;
+                top: 20px;
+                left: 25px;
+                font-size: 5rem;
+                color: rgba(0, 179, 227, 0.1);
+                font-family: Georgia, serif;
+                line-height: 1;
             }
 
             .testimonial-text {
                 font-style: italic;
                 margin-bottom: 1.5rem;
+                color: var(--text-light);
+                position: relative;
+                z-index: 1;
             }
 
             .testimonial-author {
-                font-weight: bold;
-                color: var(--primary);
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .contact-section {
+                position: relative;
+            }
+
+            .contact-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    circle at 90% 10%,
+                    rgba(0, 179, 227, 0.05) 0%,
+                    transparent 60%
+                );
+                z-index: 0;
+            }
+
+            .contact-form-container {
+                max-width: 700px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 1;
             }
 
             .contact-form {
-                max-width: 600px;
-                margin: 0 auto;
                 background-color: white;
-                padding: 2rem;
-                border-radius: 8px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                padding: 3rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
             }
 
             .form-group {
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.8rem;
             }
 
             label {
                 display: block;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.6rem;
                 font-weight: 500;
+                color: var(--text);
             }
 
             input,
             textarea,
             select {
                 width: 100%;
-                padding: 0.8rem;
-                border: 1px solid #ddd;
-                border-radius: 4px;
+                padding: 1rem;
+                border: 1px solid #eaeaea;
+                border-radius: var(--border-radius);
                 font-size: 1rem;
+                transition: var(--transition);
+                color: var(--text);
+                background-color: #fafafa;
+            }
+
+            input:focus,
+            textarea:focus,
+            select:focus {
+                outline: none;
+                border-color: var(--secondary);
+                box-shadow: 0 0 0 3px rgba(0, 179, 227, 0.1);
+                background-color: white;
             }
 
             textarea {
@@ -319,38 +506,49 @@
             }
 
             .form-btn {
-                background-color: var(--secondary);
-                color: white;
-                border: none;
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-                font-weight: bold;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-            .form-btn:hover {
-                background-color: #16a085;
+                width: 100%;
+                margin-top: 1rem;
             }
 
             footer {
                 background-color: var(--primary);
                 color: white;
-                padding: 3rem 0;
-                text-align: center;
+                padding: 5rem 0 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            footer::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    circle at 20% 80%,
+                    rgba(0, 179, 227, 0.05) 0%,
+                    transparent 70%
+                );
             }
 
             .footer-content {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
-                text-align: left;
+                gap: 3rem;
+                position: relative;
             }
 
             .footer-section h3 {
                 margin-bottom: 1.5rem;
                 color: var(--secondary);
+                font-size: 1.3rem;
+                font-weight: 600;
+            }
+
+            .footer-section p {
+                color: rgba(255, 255, 255, 0.7);
+                margin-bottom: 1rem;
             }
 
             .footer-links {
@@ -362,9 +560,9 @@
             }
 
             .footer-links a {
-                color: white;
+                color: rgba(255, 255, 255, 0.7);
                 text-decoration: none;
-                transition: color 0.3s;
+                transition: var(--transition);
             }
 
             .footer-links a:hover {
@@ -372,20 +570,125 @@
             }
 
             .footer-bottom {
-                margin-top: 2rem;
-                padding-top: 1rem;
+                margin-top: 3rem;
+                padding-top: 2rem;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.9rem;
+            }
+
+            /* Scrollbar styling */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #c0c0c0;
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a0a0a0;
             }
 
             /* Responsiv anpassning */
+            @media (max-width: 992px) {
+                .hero h1 {
+                    font-size: 2.8rem;
+                }
+
+                .about-content {
+                    gap: 3rem;
+                }
+
+                .section-header h2 {
+                    font-size: 2.2rem;
+                }
+            }
+
             @media (max-width: 768px) {
                 .container {
                     width: 95%;
-                    padding: 0 10px;
+                    padding: 0 15px;
                 }
 
                 section {
-                    padding: 3rem 0;
+                    padding: 4rem 0;
+                }
+
+                .hero {
+                    padding: 9rem 0 6rem;
+                }
+
+                .hero h1 {
+                    font-size: 2.3rem;
+                }
+
+                .hero p {
+                    font-size: 1.1rem;
+                }
+
+                .about-content {
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                }
+
+                .menu-toggle {
+                    display: block;
+                }
+
+                .menu {
+                    display: none;
+                    position: fixed;
+                    top: 70px;
+                    left: 0;
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.97);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    flex-direction: column;
+                    padding: 2rem 0;
+                    text-align: center;
+                    z-index: 99;
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                    border-radius: 0 0 var(--border-radius) var(--border-radius);
+                }
+
+                .menu.active {
+                    display: flex;
+                }
+
+                .menu li {
+                    margin: 0.8rem 0;
+                }
+
+                .menu a {
+                    display: block;
+                    padding: 0.8rem 0;
+                    font-size: 1.1rem;
+                }
+
+                .menu a::after {
+                    display: none;
+                }
+
+                .section-header h2 {
+                    font-size: 2rem;
+                }
+
+                .contact-form {
+                    padding: 2rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero {
+                    padding: 8rem 0 5rem;
                 }
 
                 .hero h1 {
@@ -396,55 +699,16 @@
                     font-size: 1rem;
                 }
 
-                .about-content {
-                    grid-template-columns: 1fr;
+                .section-header h2 {
+                    font-size: 1.8rem;
                 }
 
-                .menu-toggle {
-                    display: block;
-                }
-
-                .menu {
-                    display: none;
-                    position: fixed;
-                    top: 60px;
-                    left: 0;
-                    width: 100%;
-                    background: var(--primary);
-                    flex-direction: column;
-                    padding: 1rem 0;
-                    text-align: center;
-                    z-index: 99;
-                }
-
-                .menu.active {
-                    display: flex;
-                }
-
-                .menu li {
-                    margin: 0.5rem 0;
-                }
-
-                input,
-                textarea,
-                select,
-                .form-btn {
-                    width: 100%;
-                    box-sizing: border-box;
+                .btn {
+                    padding: 0.9rem 2rem;
                 }
 
                 .service-img {
-                    height: auto;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .hero {
-                    padding: 4rem 0;
-                }
-
-                .section-header h2 {
-                    font-size: 1.75rem;
+                    height: 180px;
                 }
 
                 .contact-form {
@@ -458,7 +722,38 @@
             <div class="container">
                 <nav>
                     <div class="logo">Återhämtnings<span>Labbet</span></div>
-                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <button
+                        class="menu-toggle"
+                        id="menuToggle"
+                        aria-label="Meny"
+                    >
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M3 12H21"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+                            <path
+                                d="M3 6H21"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+                            <path
+                                d="M3 18H21"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
                     <ul class="menu" id="mobileMenu">
                         <li><a href="#om-mig">Om mig</a></li>
                         <li><a href="#tjanster">Tjänster</a></li>
@@ -471,26 +766,32 @@
 
         <section class="hero">
             <div class="container">
-                <h1>Din väg till smärtfri rörelse börjar här</h1>
-                <p>
-                    Helhetsperspektiv för att hitta de verkliga orsakerna bakom
-                    dina skador och smärta
-                </p>
-                <a href="#kontakt" class="btn">Boka konsultation</a>
+                <div class="hero-content">
+                    <h1>Din väg till smärtfri rörelse börjar här</h1>
+                    <p>
+                        Helhetsperspektiv för att hitta de verkliga orsakerna
+                        bakom dina skador och smärta
+                    </p>
+                    <a href="#kontakt" class="btn">Boka konsultation</a>
+                </div>
             </div>
         </section>
 
-        <section id="om-mig">
+        <section id="om-mig" class="light">
             <div class="container">
                 <div class="section-header">
                     <h2>Om mig</h2>
+                    <p>
+                        En annorlunda approach till rehabilitering och
+                        rörelseanalys
+                    </p>
                 </div>
                 <div class="about-content">
                     <div class="about-image">
                         <img src="./images/me.jpg" alt="Rörelsespecialist" />
                     </div>
                     <div class="about-text">
-                        <h3>En annorlunda approach till smärta och skador</h3>
+                        <h3>Från ingenjör till rörelsespecialist</h3>
                         <p>
                             Efter tio år av egen rehabilitering och otaliga
                             besök hos fysioterapeuter insåg jag att något
@@ -521,10 +822,11 @@
             </div>
         </section>
 
-        <section id="tjanster" class="services">
+        <section id="tjanster" class="gray">
             <div class="container">
                 <div class="section-header">
                     <h2>Mina tjänster</h2>
+                    <p>Skräddarsydda lösningar för dina specifika behov</p>
                 </div>
                 <div class="services-grid">
                     <div class="service-card">
@@ -576,10 +878,11 @@
             </div>
         </section>
 
-        <section id="testimonials" class="testimonials">
+        <section id="testimonials" class="testimonials light">
             <div class="container">
                 <div class="section-header">
-                    <h2>Resultat</h2>
+                    <h2>Resultat som talar för sig själva</h2>
+                    <p>Verkliga berättelser från personer som fått hjälp</p>
                 </div>
                 <div class="testimonial-grid">
                     <div class="testimonial-card">
@@ -612,52 +915,69 @@
             </div>
         </section>
 
-        <section id="kontakt">
+        <section id="kontakt" class="contact-section gray">
             <div class="container">
                 <div class="section-header">
-                    <h2>Kontakta mig</h2>
+                    <h2>Ta första steget mot en smärtfri tillvaro</h2>
+                    <p>Fyll i formuläret så hör jag av mig inom 24 timmar</p>
                 </div>
-                <div class="contact-form">
-                    <form
-                        action="https://formspree.io/f/xgvaqvrg"
-                        method="POST"
-                    >
-                        <div class="form-group">
-                            <label for="name">Namn</label>
-                            <input type="text" id="name" name="name" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-post</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Vad gäller det?</label>
-                            <select id="service" name="service">
-                                <option value="analysis">Rörelseanalys</option>
-                                <option value="training">
-                                    Skräddarsydd träning
-                                </option>
-                                <option value="follow-up">Uppföljning</option>
-                                <option value="other">Annat</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message"
-                                >Beskriv dina besvär/önskemål</label
-                            >
-                            <textarea
-                                id="message"
-                                name="message"
-                                required
-                            ></textarea>
-                        </div>
-                        <button type="submit" class="form-btn">Skicka</button>
-                    </form>
+                <div class="contact-form-container">
+                    <div class="contact-form">
+                        <form
+                            action="https://formspree.io/f/xgvaqvrg"
+                            method="POST"
+                        >
+                            <div class="form-group">
+                                <label for="name">Namn</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    placeholder="Ditt namn"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-post</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    placeholder="Din e-postadress"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Vad gäller det?</label>
+                                <select id="service" name="service">
+                                    <option value="analysis">
+                                        Rörelseanalys
+                                    </option>
+                                    <option value="training">
+                                        Skräddarsydd träning
+                                    </option>
+                                    <option value="follow-up">
+                                        Uppföljning
+                                    </option>
+                                    <option value="other">Annat</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message"
+                                    >Beskriv dina besvär/önskemål</label
+                                >
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    required
+                                    placeholder="Berätta om dina besvär och vad du hoppas få hjälp med..."
+                                ></textarea>
+                            </div>
+                            <button type="submit" class="btn form-btn">
+                                Skicka förfrågan
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -688,32 +1008,9 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>
-                        &copy; 2025 Återhämtningslabbet. Alla rättigheter
-                        förbehållna.
-                    </p>
+                    <p>&copy; 2025 Återhämtningslabbet. Alla rättigheter</p>
                 </div>
             </div>
         </footer>
-
-        <script>
-            // Simple mobile menu toggle
-            document
-                .getElementById("menuToggle")
-                .addEventListener("click", function () {
-                    document
-                        .getElementById("mobileMenu")
-                        .classList.toggle("active");
-                });
-
-            // Close menu when link is clicked
-            document.querySelectorAll(".menu a").forEach((item) => {
-                item.addEventListener("click", function () {
-                    document
-                        .getElementById("mobileMenu")
-                        .classList.remove("active");
-                });
-            });
-        </script>
     </body>
 </html>
